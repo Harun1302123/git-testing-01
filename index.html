@@ -40,6 +40,12 @@
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
     function sendData() {
+        let params = {
+            "key1": "Value 1",
+            "key2": "Value 2",
+            "key3": "Value 3 & More"
+        }
+        let queryString = formatParams(params);
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "data.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -49,7 +55,13 @@
                 document.getElementById("result").innerHTML = this.responseText;
             }
         }
-        xhr.send("foo=bar&hello=world");
+        xhr.send(queryString);
+    }
+
+    function formatParams(data) {
+        return Object.keys(data).map(function(key) {
+            return key + "=" + encodeURIComponent(data[key]);
+        }).join('&');
     }
     document.getElementById('send').addEventListener('click', function() {
         sendData();
