@@ -1,2 +1,2 @@
 <?php
-echo json_encode($_GET, JSON_PRETTY_PRINT);
+echo json_encode($_POST, JSON_PRETTY_PRINT);
